@@ -16,7 +16,8 @@
       "WebFetch(domain:bruno-simon.com)",
       "WebFetch(domain:aino.agency)",
       "WebFetch(domain:park-se-hee.github.io)",
-      "WebFetch(domain:juanmora.co)"
+      "WebFetch(domain:juanmora.co)",
+      "Bash(claude mcp *)"
     ]
   }
 }
