@@ -17,7 +17,11 @@
       "WebFetch(domain:aino.agency)",
       "WebFetch(domain:park-se-hee.github.io)",
       "WebFetch(domain:juanmora.co)",
-      "Bash(claude mcp *)"
+      "Bash(claude mcp *)",
+      "PowerShell(npm install *)",
+      "PowerShell(chrome-mcp-server *)",
+      "PowerShell(Start-Process -FilePath \"chrome-mcp-server\" -WindowStyle Hidden -PassThru | Select-Object Id, ProcessName)",
+      "PowerShell(netstat *)"
     ]
   }
 }
