@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\admin\\\\Documents\\\\GitHub\\\\Agent-ai\\\\Agent-ai\\\\05.20\\\\my-home\\\\css\" -Force)",
+      "Bash(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\admin\\\\Documents\\\\GitHub\\\\Agent-ai\\\\Agent-ai\\\\05.20\\\\my-home\\\\js\" -Force)",
+      "Bash(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\admin\\\\Documents\\\\GitHub\\\\Agent-ai\\\\Agent-ai\\\\05.20\\\\my-home\\\\images\" -Force)",
+      "Bash(New-Item -ItemType Directory -Path \"C:\\\\Users\\\\admin\\\\Documents\\\\GitHub\\\\Agent-ai\\\\Agent-ai\\\\05.20\\\\my-home\\\\pages\" -Force)",
+      "Bash(cmd.exe /c \"ver\")",
+      "Bash(ps aux *)",
+      "Bash(python3 *)",
+      "Bash(node *)",
+      "WebSearch",
+      "Bash(npm install *)",
+      "WebFetch(domain:www.awwwards.com)",
+      "WebFetch(domain:soyoung-lee.com)",
+      "WebFetch(domain:bruno-simon.com)",
+      "WebFetch(domain:aino.agency)",
+      "WebFetch(domain:park-se-hee.github.io)",
+      "WebFetch(domain:juanmora.co)"
+    ]
+  }
+}

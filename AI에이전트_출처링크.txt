@@ -1,0 +1,70 @@
+========================================
+  AI 에이전트 최신 기사 출처 링크 모음
+  수집일: 2026-05-20
+========================================
+
+[ 국내 기사 ]
+----------------------------------------
+1. 구글 '제미나이 스파크' 출시 — AI타임스
+   https://www.aitimes.com/news/articleView.html?idxno=210727
+
+2. I/O 2026 에이전트의 미래 — Google 공식 블로그
+   https://blog.google/intl/ko-kr/company-news/technology/building-the-agentic-future-kr/
+
+3. 구글 제미나이 3.5로 AI 에이전트 시대 연다 — 인벤
+   https://www.inven.co.kr/webzine/news/?news=316589
+
+4. 구글 I/O 2026 안티그래비티 2.0 공개 — AI매터스
+   https://aimatters.co.kr/news-report/42503/
+
+5. I/O 2026 AI 검색의 새로운 시대 — Google 공식 블로그
+   https://blog.google/intl/ko-kr/company-news/technology/search-io-2026/
+
+6. 36년 만에 사명 바꾼 한컴, AI 에이전트 회사로 — 한국경제
+   https://www.hankyung.com/article/2026051971411
+
+7. 2026 에이전트 AI 트렌드 — SK AX
+   https://www.skax.co.kr/insight/trend/3624
+
+8. 행정 업무 지원 AI 에이전트 개발 — 뉴스1
+   https://www.news1.kr/press/press-release/6165063
+
+9. 중소기업 AI 에이전트 도입 비용 가이드 — Windyflo
+   https://blog.windyflo.com/blog/sme-ai-agent-cost-guide/
+
+10. 인공지능신문
+    https://www.aitimes.kr/
+
+
+[ 해외 기사 ]
+----------------------------------------
+1. AI Agent Trends 2026 Report — Google Cloud
+   https://cloud.google.com/resources/content/ai-agent-trends-2026
+
+2. AI Agents News May 2026 (Startup Edition)
+   https://blog.mean.ceo/ai-agents-news-may-2026/
+
+3. 8 Ways AI Agents Are Evolving in 2026 — Salesforce
+   https://www.salesforce.com/blog/ai-agent-trends-2026/
+
+4. AI Agent Trends for 2026: 7 Shifts to Watch — Salesmate
+   https://www.salesmate.io/blog/future-of-ai-agents/
+
+5. AI 2026 Trends: Bubbles, Agents, Demand for ROI — Axios
+   https://www.axios.com/2026/01/01/ai-2026-money-openai-google-anthropic-agents
+
+6. AI Update May 8, 2026 — MarketingProfs
+   https://www.marketingprofs.com/opinions/2026/54655/ai-update-may-8-2026-ai-news-and-views-from-the-past-week
+
+7. AI & Tech Trends 2026 — IBM
+   https://www.ibm.com/think/news/ai-tech-trends-predictions-2026
+
+8. Top 11 Agentic AI Trends to Watch in 2026 — Firecrawl
+   https://www.firecrawl.dev/blog/agentic-ai-trends
+
+9. 7 Agentic AI Trends to Watch in 2026 — ML Mastery
+   https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/
+
+========================================
+  총 국내 10개 + 해외 9개 = 19개 출처
+========================================

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 웹 디자인 컬러 트렌드</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+      background: #f5f5f5;
+      padding: 40px 20px;
+      color: #222;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      margin-top: 8px;
+      color: #888;
+      font-size: 0.95rem;
+    }
+
+    .section {
+      max-width: 960px;
+      margin: 0 auto 60px;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* 컬러칩 그리드 */
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .chip {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .chip:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+    }
+
+    .chip-color {
+      height: 120px;
+      width: 100%;
+    }
+    .chip-info {
+      background: #fff;
+      padding: 12px 14px;
+    }
+    .chip-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #222;
+    }
+    .chip-hex {
+      font-size: 0.78rem;
+      color: #999;
+      margin-top: 3px;
+      font-family: monospace;
+    }
+    .chip-desc {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    /* 팔레트 조합 */
+    .palette-group {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .palette-row {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .palette-colors {
+      display: flex;
+      height: 80px;
+    }
+    .palette-colors div {
+      flex: 1;
+    }
+    .palette-label {
+      background: #fff;
+      padding: 14px 18px;
+    }
+    .palette-label strong {
+      font-size: 0.9rem;
+    }
+    .palette-label span {
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 8px;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 60px auto;
+      max-width: 960px;
+    }
+
+    footer {
+      text-align: center;
+      color: #bbb;
+      font-size: 0.8rem;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎨 2026 웹 디자인 컬러 트렌드</h1>
+  <p>2026년 웹 디자인을 이끄는 핵심 컬러 팔레트 모음 · 작성일: 2026-05-20</p>
+</header>
+
+
+<!-- ① 팬톤 올해의 색 -->
+<div class="section">
+  <div class="section-title" style="background:#f0f0f0; color:#444;">
+    🏆 팬톤 2026 올해의 색
+  </div>
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-color" style="background:#F2F0EB;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Cloud Dancer</div>
+        <div class="chip-hex">#F2F0EB · PANTONE 11-4201</div>
+        <div class="chip-desc">부드러운 에어리 화이트. 리셋·명료함·여백의 미를 상징</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ② 도파민 컬러 -->
+<div class="section">
+  <div class="section-title" style="background:#1a1a2e; color:#fff;">
+    ⚡ 도파민 컬러 (Dopamine Colors)
+  </div>
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-color" style="background:#8B00FF;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Electric Purple</div>
+        <div class="chip-hex">#8B00FF</div>
+        <div class="chip-desc">강렬한 일렉트릭 퍼플. Y2K 감성 대표 컬러</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#FF0090;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Vivid Magenta</div>
+        <div class="chip-hex">#FF0090</div>
+        <div class="chip-desc">비비드 마젠타. 에너지·열정·대담함</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#39FF14;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Neon Green</div>
+        <div class="chip-hex">#39FF14</div>
+        <div class="chip-desc">형광 그린. 테크·게임·미래 감성</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#FF6B35;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Rich Coral</div>
+        <div class="chip-hex">#FF6B35</div>
+        <div class="chip-desc">리치 코랄. 따뜻하고 생동감 있는 오렌지</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#00F5FF;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Electric Blue</div>
+        <div class="chip-hex">#00F5FF</div>
+        <div class="chip-desc">일렉트릭 블루. 다크 배경과 최강 조합</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ③ 시네마틱 그라디언트 -->
+<div class="section">
+  <div class="section-title" style="background: linear-gradient(135deg,#667eea,#764ba2); color:#fff;">
+    🌌 시네마틱 그라디언트 (Cinematic Gradient)
+  </div>
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-color" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+      <div class="chip-info">
+        <div class="chip-name">Cosmic Dream</div>
+        <div class="chip-hex">#667eea → #764ba2</div>
+        <div class="chip-desc">블루-퍼플 몽환적 그라디언트</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+      <div class="chip-info">
+        <div class="chip-name">Rose Glow</div>
+        <div class="chip-hex">#f093fb → #f5576c</div>
+        <div class="chip-desc">핑크-레드 소프트 글로우</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+      <div class="chip-info">
+        <div class="chip-name">Ocean Mist</div>
+        <div class="chip-hex">#4facfe → #00f2fe</div>
+        <div class="chip-desc">블루 오션 앰비언트 라이팅</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+      <div class="chip-info">
+        <div class="chip-name">Aurora Green</div>
+        <div class="chip-hex">#43e97b → #38f9d7</div>
+        <div class="chip-desc">오로라 그린 메쉬 그라디언트</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+      <div class="chip-info">
+        <div class="chip-name">Sunset Layer</div>
+        <div class="chip-hex">#fa709a → #fee140</div>
+        <div class="chip-desc">핑크-옐로 선셋 레이어링</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ④ 다크 + 네온 조합 -->
+<div class="section">
+  <div class="section-title" style="background:#111; color:#39FF14;">
+    🌑 다크 + 네온 조합 (Dark &amp; Neon)
+  </div>
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-color" style="background:#0D0D0D;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Deep Black</div>
+        <div class="chip-hex">#0D0D0D</div>
+        <div class="chip-desc">네온 포인트를 극대화하는 베이스</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#1C1C2E;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Dark Navy</div>
+        <div class="chip-hex">#1C1C2E</div>
+        <div class="chip-desc">차콜 네이비. OLED 최적화 다크</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#00F5FF; border: 1px solid #eee;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Cyber Cyan</div>
+        <div class="chip-hex">#00F5FF</div>
+        <div class="chip-desc">다크 배경 위 네온 포인트 대표색</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#BF00FF;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Neon Violet</div>
+        <div class="chip-hex">#BF00FF</div>
+        <div class="chip-desc">다크 배경 위 빛나는 바이올렛</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#CCFF00;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Acid Lime</div>
+        <div class="chip-hex">#CCFF00</div>
+        <div class="chip-desc">테크·AI 브랜드 강세 네온 라임</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ⑤ 어스 톤 -->
+<div class="section">
+  <div class="section-title" style="background:#6B4F3A; color:#fff;">
+    🌿 어스 톤 (Earth Tone)
+  </div>
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-color" style="background:#2D5A27;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Forest Green</div>
+        <div class="chip-hex">#2D5A27</div>
+        <div class="chip-desc">친환경·지속가능 브랜드 대표색</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#B5651D;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Clay Brown</div>
+        <div class="chip-hex">#B5651D</div>
+        <div class="chip-desc">따뜻한 클레이. 수공예·식품 브랜드</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#C2A882;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Sand Beige</div>
+        <div class="chip-hex">#C2A882</div>
+        <div class="chip-desc">모래 베이지. 중립적이고 포근한 톤</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#1B3A5C;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Deep Ocean</div>
+        <div class="chip-hex">#1B3A5C</div>
+        <div class="chip-desc">딥 오션 블루. 신뢰·깊이감 표현</div>
+      </div>
+    </div>
+    <div class="chip">
+      <div class="chip-color" style="background:#8B7355;"></div>
+      <div class="chip-info">
+        <div class="chip-name">Warm Taupe</div>
+        <div class="chip-hex">#8B7355</div>
+        <div class="chip-desc">웜 토프. 럭셔리·웰니스 브랜드</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ⑥ 추천 팔레트 조합 -->
+<div class="section">
+  <div class="section-title" style="background:#333; color:#fff;">
+    🎯 추천 팔레트 조합
+  </div>
+  <div class="palette-group">
+
+    <div class="palette-row">
+      <div class="palette-colors">
+        <div style="background:#1C1C2E;"></div>
+        <div style="background:#BF00FF;"></div>
+        <div style="background:#00F5FF;"></div>
+        <div style="background:#F2F0EB;"></div>
+      </div>
+      <div class="palette-label">
+        <strong>🌑 사이버 테크</strong>
+        <span>#1C1C2E · #BF00FF · #00F5FF · #F2F0EB</span>
+        <div style="font-size:0.8rem; color:#888; margin-top:4px;">AI·테크·SaaS 브랜드 추천</div>
+      </div>
+    </div>
+
+    <div class="palette-row">
+      <div class="palette-colors">
+        <div style="background:#F2F0EB;"></div>
+        <div style="background:#C2A882;"></div>
+        <div style="background:#8B7355;"></div>
+        <div style="background:#2D5A27;"></div>
+      </div>
+      <div class="palette-label">
+        <strong>🌿 네이처 힐링</strong>
+        <span>#F2F0EB · #C2A882 · #8B7355 · #2D5A27</span>
+        <div style="font-size:0.8rem; color:#888; margin-top:4px;">웰니스·친환경·식품 브랜드 추천</div>
+      </div>
+    </div>
+
+    <div class="palette-row">
+      <div class="palette-colors">
+        <div style="background:#8B00FF;"></div>
+        <div style="background:#f093fb;"></div>
+        <div style="background:#FF0090;"></div>
+        <div style="background:#fee140;"></div>
+      </div>
+      <div class="palette-label">
+        <strong>⚡ 도파민 팝</strong>
+        <span>#8B00FF · #f093fb · #FF0090 · #fee140</span>
+        <div style="font-size:0.8rem; color:#888; margin-top:4px;">패션·엔터·이벤트 브랜드 추천</div>
+      </div>
+    </div>
+
+    <div class="palette-row">
+      <div class="palette-colors">
+        <div style="background:#667eea;"></div>
+        <div style="background:#764ba2;"></div>
+        <div style="background:#1B3A5C;"></div>
+        <div style="background:#F2F0EB;"></div>
+      </div>
+      <div class="palette-label">
+        <strong>🌌 코스믹 모던</strong>
+        <span>#667eea · #764ba2 · #1B3A5C · #F2F0EB</span>
+        <div style="font-size:0.8rem; color:#888; margin-top:4px;">포트폴리오·크리에이티브 에이전시 추천</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  2026 웹 디자인 컬러 트렌드 · 작성일 2026-05-20
+</footer>
+
+</body>
+</html>

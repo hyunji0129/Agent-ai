@@ -1,0 +1,65 @@
+========================================
+  시스템 정보 보고서
+  생성일: 2026-05-20
+========================================
+
+[ 1. 운영체제 버전 ]
+----------------------------------------
+OS         : Microsoft Windows 10 Pro
+버전       : 10.0.19045.6456
+플랫폼     : 64-bit
+
+
+[ 2. 디스크 사용량 ]
+----------------------------------------
+드라이브   : C:/
+전체 용량  : 931 GB
+사용 중    : 162 GB (18%)
+남은 공간  : 770 GB (82%)
+
+
+[ 3. 현재 실행 중인 주요 프로세스 ]
+----------------------------------------
+
+  ■ 시스템 핵심 프로세스
+  ----------------------------------
+  System Idle Process     PID:     0    메모리:       8 K
+  System                  PID:     4    메모리:     148 K
+  lsass.exe               PID:   944    메모리:  24,212 K   (보안·인증)
+  services.exe            PID:   940    메모리:  10,428 K   (서비스 관리)
+  winlogon.exe            PID:  1140    메모리:  11,860 K   (로그인 관리)
+  dwm.exe                 PID:  1388    메모리:  77,820 K   (화면 구성)
+  explorer.exe            PID:  6732    메모리: 199,304 K   (탐색기)
+
+  ■ 개발 도구
+  ----------------------------------
+  claude.exe              PID: 10704    메모리: 463,324 K   (Claude AI)
+  Code.exe (x10)          PID: 여러 개  메모리: 최대 384,316 K  (VS Code)
+  GitHubDesktop.exe (x4)  PID: 여러 개  메모리: 최대 127,600 K  (GitHub Desktop)
+  powershell.exe          PID: 15252    메모리:  84,740 K   (PowerShell)
+
+  ■ 브라우저
+  ----------------------------------
+  chrome.exe (x12)        PID: 여러 개  메모리: 최대 651,776 K  (Google Chrome)
+
+  ■ 응용 프로그램
+  ----------------------------------
+  KakaoTalk.exe           PID: 11068    메모리:  41,192 K   (카카오톡)
+  EpicGamesLauncher.exe   PID:  4072    메모리: 135,352 K   (에픽게임즈)
+  mediaget.exe            PID: 12200    메모리: 156,572 K   (미디어겟)
+  RocketDock.exe          PID:  7124    메모리:  32,908 K   (독 런처)
+  OfficeClickToRun.exe    PID:  4344    메모리:  65,284 K   (MS Office)
+  OneDrive.Sync.Service   PID:  7772    메모리:   5,740 K   (원드라이브)
+  SearchApp.exe           PID:  8512    메모리: 248,632 K   (Windows 검색)
+
+  ■ 보안 / 시스템 유틸리티
+  ----------------------------------
+  QHSafeTray.exe          PID: 13348    메모리:  82,140 K   (360 보안)
+  QHActiveDefense.exe     PID:  3324    메모리: 159,492 K   (360 능동 방어)
+  SecurityHealthService   PID: 14812    메모리:  13,276 K   (Windows 보안)
+  NVDisplay.Container.exe PID:  1780    메모리:  47,968 K   (NVIDIA 디스플레이)
+  SysCleanPro.exe         PID: 14564    메모리:  89,820 K   (시스템 클리너)
+
+========================================
+  END OF REPORT
+========================================
