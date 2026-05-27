@@ -21,7 +21,9 @@
       "PowerShell(npm install *)",
       "PowerShell(chrome-mcp-server *)",
       "PowerShell(Start-Process -FilePath \"chrome-mcp-server\" -WindowStyle Hidden -PassThru | Select-Object Id, ProcessName)",
-      "PowerShell(netstat *)"
+      "PowerShell(netstat *)",
+      "Bash(dir \"C:\\\\Users\\\\admin\\\\Documents\\\\GitHub\\\\Agent-ai\\\\Agent-ai\\\\Agent-ai\")",
+      "WebFetch(domain:unsplash.com)"
     ]
   }
 }

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>꽃차 원데이 클래스 | 봄날의 꽃차</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-mark">✿</div>
+      <div>
+        <div class="logo-name">Bom Tea
+          <span class="logo-sub">봄날의 꽃차 공방</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-phone">문의&nbsp;<a href="tel:010-1234-5678">010-1234-5678</a></div>
+  </header>
+
+
+  <!-- ① HERO SLIDER -->
+  <section class="hero-slider" id="home">
+
+    <div class="slider-track">
+
+      <!-- Slide 1 — 메인 -->
+      <div class="slide">
+        <div class="slide-copy">
+          <p class="hero-eyebrow">One-Day Class &nbsp;·&nbsp; 2026 Spring</p>
+          <p class="sub-desc">모든 재료를 국내산 천연 꽃으로<br>자연 그대로 담아낸 꽃차 클래스<span class="cursor" aria-hidden="true">│</span></p>
+          <div class="dash"></div>
+          <h1 class="hero-title">Floral Tea<br>Class</h1>
+          <div class="hero-meta">
+            <div class="hero-meta-row"><span class="mdot"></span>6월 7일(토) · 14일(토)</div>
+            <div class="hero-meta-row"><span class="mdot"></span>오전 10시 – 오후 1시 (3시간)</div>
+            <div class="hero-meta-row"><span class="mdot"></span>서울 마포구 공방 · 소수 정원 8명</div>
+            <div class="hero-meta-row"><span class="mdot"></span>수강료 65,000원 (재료비 포함)</div>
+          </div>
+          <a href="#apply" class="btn-apply">지금 신청하기</a>
+          <p class="hero-urgency">
+            <span class="u-dot"></span>
+            <span class="u-label">마감 임박</span>&nbsp;·&nbsp;6월 7일 잔여 3석
+          </p>
+        </div>
+        <div class="slide-img">
+          <div class="slide-img-wrap">
+            <img src="img/s-hero.jpg" alt="꽃차 클래스" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 — 재료 퀄리티 -->
+      <div class="slide">
+        <div class="slide-copy">
+          <p class="hero-eyebrow">Premium Quality &nbsp;·&nbsp; 100% Natural</p>
+          <p class="sub-desc">어떠한 화학 첨가물도 없이<br>농가에서 직접 공수한 순수한 꽃</p>
+          <div class="dash"></div>
+          <h1 class="hero-title">Natural<br>Flower Tea</h1>
+          <div class="hero-meta">
+            <div class="hero-meta-row"><span class="mdot"></span>국내산 프리미엄 꽃 100% 사용</div>
+            <div class="hero-meta-row"><span class="mdot"></span>화학 첨가물 · 방부제 완전 배제</div>
+            <div class="hero-meta-row"><span class="mdot"></span>피부 예민 · 아토피도 안심 사용</div>
+            <div class="hero-meta-row"><span class="mdot"></span>나만의 꽃차 키트 완성 후 증정</div>
+          </div>
+          <a href="#about" class="btn-apply">클래스 소개 보기</a>
+        </div>
+        <div class="slide-img">
+          <div class="slide-img-wrap">
+            <img src="img/s-about.jpg" alt="꽃차 재료" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 — 경험 강조 -->
+      <div class="slide">
+        <div class="slide-copy">
+          <p class="hero-eyebrow">Limited Seats &nbsp;·&nbsp; Only 8 People</p>
+          <p class="sub-desc">꽃 선별부터 덖음까지<br>오감으로 느끼는 3시간 힐링</p>
+          <div class="dash"></div>
+          <h1 class="hero-title">Healing<br>Experience</h1>
+          <div class="hero-meta">
+            <div class="hero-meta-row"><span class="mdot"></span>소수 정원 8명 · 밀도 있는 수업</div>
+            <div class="hero-meta-row"><span class="mdot"></span>감성 스튜디오 사진 촬영 지원</div>
+            <div class="hero-meta-row"><span class="mdot"></span>나만의 꽃차 레시피 카드 제작</div>
+            <div class="hero-meta-row"><span class="mdot"></span>꽃차 소믈리에 1급 전문 강사</div>
+          </div>
+          <a href="#apply" class="btn-apply">지금 예약하기</a>
+        </div>
+        <div class="slide-img">
+          <div class="slide-img-wrap">
+            <img src="img/s-benefit1.jpg" alt="클래스 체험" />
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.slider-track -->
+
+    <!-- 좌우 화살표 -->
+    <button class="slider-arrow slider-prev" aria-label="이전 슬라이드">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="slider-arrow slider-next" aria-label="다음 슬라이드">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <!-- 점 인디케이터 -->
+    <div class="slider-dots">
+      <button class="s-dot s-dot--active" aria-label="슬라이드 1"></button>
+      <button class="s-dot" aria-label="슬라이드 2"></button>
+      <button class="s-dot" aria-label="슬라이드 3"></button>
+    </div>
+
+    <!-- 하단 프로그레스 바 -->
+    <div class="slider-progress">
+      <div class="slider-progress-bar"></div>
+    </div>
+
+  </section>
+
+
+  <!-- ② 이런 분께 추천 — 좌 타이틀 | 우 2×2 카드 -->
+  <section class="recommend">
+    <div class="recommend-inner">
+      <div class="rec-aside">
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><path d="M6.5 1C4.5 3 2 5.5 2 7.8a4.5 3.5 0 0 0 4.5 3 4.5 3.5 0 0 0 4.5-3C11 5.5 8.5 3 6.5 1z"/></svg>
+          이런 분께
+        </div>
+        <h2 class="section-title">추천해요</h2>
+        <p class="lead">처음이어도<br>괜찮아요.<br><br>차 한 잔의 경험이<br>선물이 됩니다.</p>
+      </div>
+      <div class="rec-grid">
+        <div class="rec-card">
+          <div class="rec-circle">🌿</div>
+          <h4>힐링이 필요하신 분</h4>
+          <p>일상의 피로에서 잠시 벗어나고 싶을 때</p>
+        </div>
+        <div class="rec-card">
+          <div class="rec-circle">🎁</div>
+          <h4>의미 있는 선물을 찾는 분</h4>
+          <p>소중한 사람에게 직접 만든 꽃차를</p>
+        </div>
+        <div class="rec-card">
+          <div class="rec-circle">📸</div>
+          <h4>감성 취미를 원하시는 분</h4>
+          <p>SNS에 자랑하고 싶은 예쁜 경험</p>
+        </div>
+        <div class="rec-card">
+          <div class="rec-circle">🍵</div>
+          <h4>차를 처음 접하시는 분</h4>
+          <p>지식 없이도 누구나 참여 가능</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ③ ABOUT — 5fr / 6fr -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-photo">
+        <div class="about-photo-main">
+          <img src="img/s-about.jpg" alt="꽃차 만들기" />
+        </div>
+        <div class="about-photo-sub">
+          <img src="img/s-about-sub.jpg" alt="완성된 꽃차" />
+        </div>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">About the Class</p>
+        <div class="dash"></div>
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="2"/><circle cx="6.5" cy="2" r="1.4"/><circle cx="10.6" cy="4.25" r="1.4"/><circle cx="10.6" cy="8.75" r="1.4"/><circle cx="6.5" cy="11" r="1.4"/><circle cx="2.4" cy="8.75" r="1.4"/><circle cx="2.4" cy="4.25" r="1.4"/></svg>
+          About 꽃차 원데이 클래스
+        </div>
+        <h2 class="about-title">안심하고<br>즐기세요.</h2>
+        <p class="desc">
+          어떠한 화학 첨가물도 넣지 않았습니다.<br>
+          국내 농가에서 직접 공수한 신선한 꽃을 고르고,
+          손수 덖어 나만의 꽃차를 완성하는
+          <strong>3시간의 특별한 경험.</strong>
+        </p>
+        <p class="note">
+          피부가 민감하고 아토피가 있는 분들도,<br>
+          처음 차를 접하시는 분들도 편하게 참여하실 수 있는<br>
+          <strong>미니멀 에코 클래스</strong>입니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ④ BENEFITS — 피처드(세로 큰) + 2 스택 -->
+  <section class="benefits" id="benefits">
+    <div class="benefits-inner">
+      <div class="benefits-head">
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><path d="M6.5 1l1.4 4.2H13l-3.8 2.8 1.4 4.2-4.1-3-4.1 3 1.4-4.2L0 5.2h5.1z"/></svg>
+          꽃차 클래스의 체크 포인트
+        </div>
+        <h2 class="section-title">이런 점이&nbsp;<em>달라요</em></h2>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card benefit-featured">
+          <div class="benefit-photo"><img src="img/s-benefit1.jpg" alt="국내산 꽃 재료" /></div>
+          <div class="benefit-body">
+            <h3>국내산 프리미엄 재료</h3>
+            <p>농가에서 직접 공수한 신선한 국내산 꽃을 사용해 색과 향이 더욱 풍부합니다.</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-photo"><img src="img/s-benefit2.jpg" alt="꽃차 키트" /></div>
+          <div class="benefit-body">
+            <h3>나만의 꽃차 키트 증정</h3>
+            <p>수업 후 직접 만든 꽃차를 예쁜 패키지에 담아 가져가세요.</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-photo"><img src="img/s-benefit3.jpg" alt="감성 촬영" /></div>
+          <div class="benefit-body">
+            <h3>감성 사진 촬영 지원</h3>
+            <p>완성된 꽃차와 함께 스튜디오 감성의 사진을 남겨드립니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ⑤ CHECK — 흰 배경, 텍스트 55 / 이미지 45 -->
+  <section class="check">
+    <div class="check-inner">
+      <div class="check-copy">
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><path d="M6.5 1C4.5 3 2 5.5 2 7.8a4.5 3.5 0 0 0 4.5 3 4.5 3.5 0 0 0 4.5-3C11 5.5 8.5 3 6.5 1z"/><rect x="5.9" y="6.5" width="1.2" height="5.5" rx=".6"/></svg>
+          수업에서 배우는 것들
+        </div>
+        <h2 class="section-title" style="margin-bottom:8px">수업&nbsp;<em>내용</em></h2>
+        <p class="sub">꽃 선별부터 포장까지, 처음부터 끝까지 함께합니다.</p>
+        <ul class="check-list">
+          <li>꽃 선별부터 덖음까지 직접 체험</li>
+          <li>세면·바디·음용 모두 가능한 꽃차 제조</li>
+          <li>낮은 자극으로 화장 클렌징 활용법</li>
+          <li>건조한 피부를 보호하는 블렌딩 법</li>
+          <li>나만의 꽃차 레시피 카드 제작</li>
+        </ul>
+      </div>
+      <div class="check-photo">
+        <img src="img/s-check.jpg" alt="수업 장면" />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ⑥ INSTRUCTOR -->
+  <section class="instructor" id="instructor">
+    <div class="instructor-inner">
+      <div class="badge" style="margin-bottom:32px">
+        <svg viewBox="0 0 13 13"><circle cx="6.5" cy="4" r="2.6"/><path d="M1 12c0-3 2.5-5.5 5.5-5.5S12 9 12 12z"/></svg>
+        강사 소개
+      </div>
+      <div class="instructor-card">
+        <div class="inst-photo"><img src="img/instructor.jpg" alt="이수연 강사" /></div>
+        <div class="inst-body">
+          <div class="inst-name">이수연</div>
+          <div class="inst-role">꽃차 소믈리에 1급 · 티 블렌딩 전문가</div>
+          <p class="inst-desc">
+            10년 넘게 차 문화를 연구하며 전국 각지의 꽃을 직접 찾아다녔어요.
+            복잡한 이론 대신, 오감으로 느끼는 자연스러운 수업을 지향합니다.
+            처음 오시는 분도 오랜 친구처럼 편하게 즐기실 수 있어요.
+          </p>
+          <ul class="inst-career">
+            <li>한국꽃차소믈리에협회 정회원</li>
+            <li>서울 문화재단 공예 프로그램 협력 강사</li>
+            <li>롯데·현대·신세계 백화점 팝업 클래스 진행</li>
+            <li>저서 「꽃과 차 사이」 출판 (2024)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ⑦ FAQ -->
+  <section class="faq" id="faq">
+    <div class="faq-inner">
+      <div class="faq-head">
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><path d="M1.5 1h10a.8.8 0 0 1 .8.8v6.7a.8.8 0 0 1-.8.8H8L5.5 12V9.3H1.5a.8.8 0 0 1-.8-.8V1.8A.8.8 0 0 1 1.5 1z"/></svg>
+          자주 묻는 질문
+        </div>
+        <p class="serif-label">FAQ</p>
+        <p>궁금하신 점은 언제든지 문의주세요.</p>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggle(this)">
+          <div class="faq-btn-left"><span class="faq-q">Q.</span><span class="faq-text">차나 꽃에 대한 지식이 전혀 없어도 참여할 수 있나요?</span></div>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-ans">물론이에요! 재료 준비부터 포장까지 모든 과정을 강사가 함께 안내해 드립니다. 오히려 선입견 없이 오시는 분들이 더 즐겁게 참여하시더라고요.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggle(this)">
+          <div class="faq-btn-left"><span class="faq-q">Q.</span><span class="faq-text">수업 재료비와 준비물이 따로 있나요?</span></div>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-ans">수강료에 모든 재료비가 포함되어 있습니다. 별도로 준비하실 것은 없고, 편한 복장으로 오시면 됩니다. 앞치마와 도구 일체는 공방에서 제공해 드려요.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggle(this)">
+          <div class="faq-btn-left"><span class="faq-q">Q.</span><span class="faq-text">수강료는 얼마이고 결제는 어떻게 하나요?</span></div>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-ans">1인 수강료는 <strong>65,000원</strong>입니다. 신청 폼 제출 후 안내드리는 계좌로 3일 이내 입금하시면 최종 확정됩니다. 2인 이상 함께 신청 시 인당 5,000원 할인!</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggle(this)">
+          <div class="faq-btn-left"><span class="faq-q">Q.</span><span class="faq-text">취소 및 환불 정책이 어떻게 되나요?</span></div>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-ans">수업 7일 전: 전액 환불 / 3~6일 전: 50% 환불 / 2일 이내: 환불 불가. 강사 사정으로 폐강 시 전액 환불해 드립니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggle(this)">
+          <div class="faq-btn-left"><span class="faq-q">Q.</span><span class="faq-text">주차가 가능한가요?</span></div>
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-ans">공방 인근 공영 주차장(도보 3분) 이용 가능합니다. 지하철 2호선 합정역 3번 출구에서 도보 8분 거리예요. 자세한 오시는 길은 신청 확정 후 안내 문자로 보내드립니다.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ⑧ APPLY -->
+  <section class="apply" id="apply">
+    <div class="apply-inner">
+      <div class="apply-head">
+        <div class="badge">
+          <svg viewBox="0 0 13 13"><path d="M1 3a.7.7 0 0 1 .7-.7h10.6a.7.7 0 0 1 .7.7v7a.7.7 0 0 1-.7.7H1.7A.7.7 0 0 1 1 10V3zm.7 0v.4l4.8 3.3 4.8-3.3V3H1.7zm0 1.1V10h9.6V4.1l-4.8 3.2-4.8-3.2z"/></svg>
+          신청하기
+        </div>
+        <p class="serif-label">Apply Now</p>
+        <p>소수 정원으로 진행됩니다. 서둘러 자리를 확보하세요!</p>
+      </div>
+      <div class="apply-box">
+        <form onsubmit="formSubmit(event)">
+          <div class="form-row">
+            <div class="fg"><label>이름 <span class="req">*</span></label><input type="text" placeholder="홍길동" required /></div>
+            <div class="fg"><label>연락처 <span class="req">*</span></label><input type="tel" placeholder="010-0000-0000" required /></div>
+          </div>
+          <div class="fg"><label>이메일</label><input type="email" placeholder="example@email.com" /></div>
+          <div class="form-row">
+            <div class="fg">
+              <label>희망 날짜 <span class="req">*</span></label>
+              <select required>
+                <option value="" disabled selected>날짜 선택</option>
+                <option>6월 7일(토) 오전 10시</option>
+                <option>6월 14일(토) 오전 10시</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>인원 <span class="req">*</span></label>
+              <select required>
+                <option value="" disabled selected>인원 선택</option>
+                <option>1명</option>
+                <option>2명</option>
+                <option>3명 이상 (문의)</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg"><label>문의 사항</label><textarea placeholder="궁금하신 점을 자유롭게 적어주세요."></textarea></div>
+          <div class="form-check">
+            <input type="checkbox" id="agree" required />
+            <label for="agree">개인정보 수집 및 이용에 동의합니다. 수집된 정보는 수업 안내 목적으로만 사용됩니다.</label>
+          </div>
+          <button type="submit" class="btn-submit">신청서 제출하기</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-logo">Bom Tea &nbsp;·&nbsp; 봄날의 꽃차</p>
+    서울특별시 마포구 어울마당로 00길 00 &nbsp;·&nbsp; 사업자등록번호 000-00-00000<br>
+    대표 이수연 &nbsp;·&nbsp;
+    <a href="tel:010-1234-5678">010-1234-5678</a> &nbsp;·&nbsp;
+    <a href="mailto:hello@bom-flowtea.kr">hello@bom-flowtea.kr</a><br>
+    <small style="opacity:.35; font-size:.75rem">© 2026 봄날의 꽃차. All rights reserved.</small>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
