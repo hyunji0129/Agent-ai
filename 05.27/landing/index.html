@@ -15,13 +15,23 @@
   <header>
     <div class="logo">
       <div class="logo-mark">✿</div>
-      <div>
-        <div class="logo-name">Bom Tea
-          <span class="logo-sub">봄날의 꽃차 공방</span>
-        </div>
+      <div class="logo-name">Bom Tea
+        <span class="logo-sub">봄날의 꽃차 공방</span>
       </div>
     </div>
-    <div class="h-phone">문의&nbsp;<a href="tel:010-1234-5678">010-1234-5678</a></div>
+    <nav class="h-nav">
+      <a href="#about">클래스 소개</a>
+      <a href="#benefits">혜택</a>
+      <a href="#instructor">강사 소개</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="h-right">
+      <div class="h-phone">
+        <button class="h-phone-btn" id="phoneToggle" aria-expanded="false">문의</button>
+        <a href="tel:010-1234-5678" class="h-phone-num" id="phoneNum">010-1234-5678</a>
+      </div>
+      <a href="#apply" class="h-apply-btn">신청하기</a>
+    </div>
   </header>
 
 
@@ -38,14 +48,13 @@
           <div class="dash"></div>
           <h1 class="hero-title">Floral Tea<br>Class</h1>
           <div class="hero-meta">
-            <div class="hero-meta-row"><span class="mdot"></span>6월 7일(토) · 14일(토)</div>
-            <div class="hero-meta-row"><span class="mdot"></span>오전 10시 – 오후 1시 (3시간)</div>
-            <div class="hero-meta-row"><span class="mdot"></span>서울 마포구 공방 · 소수 정원 8명</div>
-            <div class="hero-meta-row"><span class="mdot"></span>수강료 65,000원 (재료비 포함)</div>
+            <div class="hero-meta-row">6월 7일(토) · 14일(토)</div>
+            <div class="hero-meta-row">오전 10시 – 오후 1시 (3시간)</div>
+            <div class="hero-meta-row">서울 마포구 공방 · 소수 정원 8명</div>
+            <div class="hero-meta-row">수강료 65,000원 (재료비 포함)</div>
           </div>
           <a href="#apply" class="btn-apply">지금 신청하기</a>
           <p class="hero-urgency">
-            <span class="u-dot"></span>
             <span class="u-label">마감 임박</span>&nbsp;·&nbsp;6월 7일 잔여 3석
           </p>
         </div>
@@ -64,10 +73,10 @@
           <div class="dash"></div>
           <h1 class="hero-title">Natural<br>Flower Tea</h1>
           <div class="hero-meta">
-            <div class="hero-meta-row"><span class="mdot"></span>국내산 프리미엄 꽃 100% 사용</div>
-            <div class="hero-meta-row"><span class="mdot"></span>화학 첨가물 · 방부제 완전 배제</div>
-            <div class="hero-meta-row"><span class="mdot"></span>피부 예민 · 아토피도 안심 사용</div>
-            <div class="hero-meta-row"><span class="mdot"></span>나만의 꽃차 키트 완성 후 증정</div>
+            <div class="hero-meta-row">국내산 프리미엄 꽃 100% 사용</div>
+            <div class="hero-meta-row">화학 첨가물 · 방부제 완전 배제</div>
+            <div class="hero-meta-row">피부 예민 · 아토피도 안심 사용</div>
+            <div class="hero-meta-row">나만의 꽃차 키트 완성 후 증정</div>
           </div>
           <a href="#about" class="btn-apply">클래스 소개 보기</a>
         </div>
@@ -86,10 +95,10 @@
           <div class="dash"></div>
           <h1 class="hero-title">Healing<br>Experience</h1>
           <div class="hero-meta">
-            <div class="hero-meta-row"><span class="mdot"></span>소수 정원 8명 · 밀도 있는 수업</div>
-            <div class="hero-meta-row"><span class="mdot"></span>감성 스튜디오 사진 촬영 지원</div>
-            <div class="hero-meta-row"><span class="mdot"></span>나만의 꽃차 레시피 카드 제작</div>
-            <div class="hero-meta-row"><span class="mdot"></span>꽃차 소믈리에 1급 전문 강사</div>
+            <div class="hero-meta-row">소수 정원 8명 · 밀도 있는 수업</div>
+            <div class="hero-meta-row">감성 스튜디오 사진 촬영 지원</div>
+            <div class="hero-meta-row">나만의 꽃차 레시피 카드 제작</div>
+            <div class="hero-meta-row">꽃차 소믈리에 1급 전문 강사</div>
           </div>
           <a href="#apply" class="btn-apply">지금 예약하기</a>
         </div>
@@ -130,30 +139,37 @@
     <div class="recommend-inner">
       <div class="rec-aside">
         <div class="badge">
-          <svg viewBox="0 0 13 13"><path d="M6.5 1C4.5 3 2 5.5 2 7.8a4.5 3.5 0 0 0 4.5 3 4.5 3.5 0 0 0 4.5-3C11 5.5 8.5 3 6.5 1z"/></svg>
           이런 분께
         </div>
         <h2 class="section-title">추천해요</h2>
-        <p class="lead">처음이어도<br>괜찮아요.<br><br>차 한 잔의 경험이<br>선물이 됩니다.</p>
+        <p class="lead">처음이어도 괜찮아요.<br>차 한 잔의 경험이 선물이 됩니다.</p>
       </div>
       <div class="rec-grid">
         <div class="rec-card">
-          <div class="rec-circle">🌿</div>
+          <div class="rec-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c0-6-4-10-4-10s4-1 6 2c1-4 4-6 4-6s0 5-3 8"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+          </div>
           <h4>힐링이 필요하신 분</h4>
           <p>일상의 피로에서 잠시 벗어나고 싶을 때</p>
         </div>
         <div class="rec-card">
-          <div class="rec-circle">🎁</div>
+          <div class="rec-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M12 8V22"/><path d="M3 12h18"/><path d="M8 8c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>
+          </div>
           <h4>의미 있는 선물을 찾는 분</h4>
           <p>소중한 사람에게 직접 만든 꽃차를</p>
         </div>
         <div class="rec-card">
-          <div class="rec-circle">📸</div>
+          <div class="rec-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="3"/><circle cx="12" cy="14" r="3"/><path d="M16 3l-4 4-4-4"/></svg>
+          </div>
           <h4>감성 취미를 원하시는 분</h4>
           <p>SNS에 자랑하고 싶은 예쁜 경험</p>
         </div>
         <div class="rec-card">
-          <div class="rec-circle">🍵</div>
+          <div class="rec-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v4"/><path d="M18 6H4a1 1 0 0 0-1 1v8a7 7 0 0 0 14 0V7a1 1 0 0 0-1-1z"/><path d="M18 8h2a2 2 0 0 1 0 4h-2"/></svg>
+          </div>
           <h4>차를 처음 접하시는 분</h4>
           <p>지식 없이도 누구나 참여 가능</p>
         </div>
@@ -177,7 +193,6 @@
         <p class="eyebrow">About the Class</p>
         <div class="dash"></div>
         <div class="badge">
-          <svg viewBox="0 0 13 13"><circle cx="6.5" cy="6.5" r="2"/><circle cx="6.5" cy="2" r="1.4"/><circle cx="10.6" cy="4.25" r="1.4"/><circle cx="10.6" cy="8.75" r="1.4"/><circle cx="6.5" cy="11" r="1.4"/><circle cx="2.4" cy="8.75" r="1.4"/><circle cx="2.4" cy="4.25" r="1.4"/></svg>
           About 꽃차 원데이 클래스
         </div>
         <h2 class="about-title">안심하고<br>즐기세요.</h2>
@@ -202,7 +217,6 @@
     <div class="benefits-inner">
       <div class="benefits-head">
         <div class="badge">
-          <svg viewBox="0 0 13 13"><path d="M6.5 1l1.4 4.2H13l-3.8 2.8 1.4 4.2-4.1-3-4.1 3 1.4-4.2L0 5.2h5.1z"/></svg>
           꽃차 클래스의 체크 포인트
         </div>
         <h2 class="section-title">이런 점이&nbsp;<em>달라요</em></h2>
@@ -239,7 +253,6 @@
     <div class="check-inner">
       <div class="check-copy">
         <div class="badge">
-          <svg viewBox="0 0 13 13"><path d="M6.5 1C4.5 3 2 5.5 2 7.8a4.5 3.5 0 0 0 4.5 3 4.5 3.5 0 0 0 4.5-3C11 5.5 8.5 3 6.5 1z"/><rect x="5.9" y="6.5" width="1.2" height="5.5" rx=".6"/></svg>
           수업에서 배우는 것들
         </div>
         <h2 class="section-title" style="margin-bottom:8px">수업&nbsp;<em>내용</em></h2>
@@ -263,7 +276,6 @@
   <section class="instructor" id="instructor">
     <div class="instructor-inner">
       <div class="badge" style="margin-bottom:32px">
-        <svg viewBox="0 0 13 13"><circle cx="6.5" cy="4" r="2.6"/><path d="M1 12c0-3 2.5-5.5 5.5-5.5S12 9 12 12z"/></svg>
         강사 소개
       </div>
       <div class="instructor-card">
@@ -293,7 +305,6 @@
     <div class="faq-inner">
       <div class="faq-head">
         <div class="badge">
-          <svg viewBox="0 0 13 13"><path d="M1.5 1h10a.8.8 0 0 1 .8.8v6.7a.8.8 0 0 1-.8.8H8L5.5 12V9.3H1.5a.8.8 0 0 1-.8-.8V1.8A.8.8 0 0 1 1.5 1z"/></svg>
           자주 묻는 질문
         </div>
         <p class="serif-label">FAQ</p>
@@ -343,7 +354,6 @@
     <div class="apply-inner">
       <div class="apply-head">
         <div class="badge">
-          <svg viewBox="0 0 13 13"><path d="M1 3a.7.7 0 0 1 .7-.7h10.6a.7.7 0 0 1 .7.7v7a.7.7 0 0 1-.7.7H1.7A.7.7 0 0 1 1 10V3zm.7 0v.4l4.8 3.3 4.8-3.3V3H1.7zm0 1.1V10h9.6V4.1l-4.8 3.2-4.8-3.2z"/></svg>
           신청하기
         </div>
         <p class="serif-label">Apply Now</p>

@@ -1,4 +1,25 @@
 /* ══════════════════════════════
+   헤더 전화번호 토글
+══════════════════════════════ */
+(function () {
+  const btn = document.getElementById('phoneToggle');
+  const num = document.getElementById('phoneNum');
+  if (!btn || !num) return;
+
+  btn.addEventListener('click', function () {
+    const open = num.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !num.contains(e.target)) {
+      num.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', false);
+    }
+  });
+})();
+
+/* ══════════════════════════════
    FAQ 아코디언
 ══════════════════════════════ */
 function toggle(btn) {
