@@ -1,4 +1,25 @@
 /* ══════════════════════════════
+   햄버거 메뉴
+══════════════════════════════ */
+(function () {
+  const burger = document.getElementById('burgerBtn');
+  const nav    = document.querySelector('.h-nav');
+  if (!burger || !nav) return;
+
+  burger.addEventListener('click', function () {
+    const open = nav.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+  });
+
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      burger.classList.remove('is-open');
+    });
+  });
+})();
+
+/* ══════════════════════════════
    헤더 전화번호 토글
 ══════════════════════════════ */
 (function () {
