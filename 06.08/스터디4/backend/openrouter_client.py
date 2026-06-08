@@ -4,14 +4,21 @@ OpenRouter API client for AI model interactions
 import requests
 import json
 import time
+import logging
 from typing import Dict, List, Optional
 from backend.config import Config
+
+logger = logging.getLogger(__name__)
 
 class OpenRouterClient:
     """Client for OpenRouter API"""
 
     def __init__(self):
         self.api_key = Config.OPENROUTER_API_KEY
+        if self.api_key is None:
+            logger.warning(
+                "OPENROUTER_API_KEY is not set. API requests will fail until a valid key is configured."
+            )
         self.base_url = Config.OPENROUTER_BASE_URL
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
@@ -142,7 +149,7 @@ Be specific and accurate. Only list items you're confident about."""
             line = line.strip()
 
             # Check if it's a category line
-            if line.startswith('Category:') or ':' in line and not line.startswith('-'):
+            if line.startswith('Category:') or (':' in line and not line.startswith('-')):
                 category = line.split(':')[1].strip() if ':' in line else line
                 current_category = category
                 ingredients[current_category] = []

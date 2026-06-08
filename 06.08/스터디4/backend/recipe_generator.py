@@ -2,6 +2,7 @@
 Recipe generation service using DeepSeek model
 """
 import json
+import re
 from typing import Dict, List, Optional
 from backend.config import Config
 from backend.openrouter_client import OpenRouterClient
@@ -168,21 +169,18 @@ class RecipeGenerator:
                 elif line.startswith('조리시간:'):
                     time_str = line.replace('조리시간:', '').strip()
                     # Extract number from string like "30분"
-                    import re
                     time_match = re.search(r'\d+', time_str)
                     recipe['time'] = int(time_match.group()) if time_match else 30
 
                 # Parse servings
                 elif line.startswith('인분:'):
                     servings_str = line.replace('인분:', '').strip()
-                    import re
                     servings_match = re.search(r'\d+', servings_str)
                     recipe['servings'] = int(servings_match.group()) if servings_match else 4
 
                 # Parse calories
                 elif line.startswith('칼로리:'):
                     cal_str = line.replace('칼로리:', '').strip()
-                    import re
                     cal_match = re.search(r'\d+', cal_str)
                     recipe['calories'] = int(cal_match.group()) if cal_match else 0
 
@@ -213,7 +211,6 @@ class RecipeGenerator:
 
                 elif current_section == 'steps':
                     # Handle numbered steps
-                    import re
                     step_match = re.match(r'^\d+\.\s*(.*)', line)
                     if step_match:
                         steps.append(step_match.group(1))
@@ -309,7 +306,6 @@ class RecipeGenerator:
             clean_ing = ingredient.lower().strip()
 
             # Remove quantity if present
-            import re
             clean_ing = re.sub(r'\d+\s*\w*', '', clean_ing).strip()
 
             # Translate if in dictionary, otherwise keep original

@@ -8,7 +8,8 @@
       "Bash(py test_step1.py)",
       "Bash(py:*)",
       "Bash(findstr:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(echo \"exit=$?\")"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,1 @@
+- [냉장고를 부탁해 UX 개선 작업](project-fridge-ux.md) — null 방어, Toast 누적 방지, 공통 헬퍼 추출, 재료 파싱 개선, CSP, 드래그앤드롭 피드백

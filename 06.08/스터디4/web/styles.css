@@ -308,6 +308,28 @@ body {
     cursor: not-allowed;
 }
 
+/* 버튼 로딩 상태 스피너 */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 50%;
+    left: 50%;
+    margin-top: -9px;
+    margin-left: -9px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
 .btn-icon {
     font-size: var(--font-size-lg);
 }
@@ -357,12 +379,19 @@ body {
     border-radius: var(--radius-lg);
     padding: var(--spacing-2xl);
     text-align: center;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
     margin-bottom: var(--spacing-lg);
     min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* 드래그앤드롭 활성 상태 시각적 피드백 */
+.upload-area.drag-over {
+    border-color: var(--color-primary);
+    background-color: rgba(255, 107, 53, 0.05);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.15);
 }
 
 .upload-placeholder {
@@ -783,6 +812,29 @@ body {
     gap: var(--spacing-md);
     z-index: 1000;
     animation: slideIn 0.3s ease;
+    border-left: 4px solid var(--color-success);
+    max-width: 360px;
+}
+
+/* 토스트 타입별 색상 구분 */
+.toast-success {
+    border-left-color: var(--color-success);
+    background: #f0fdf4;
+}
+
+.toast-error {
+    border-left-color: var(--color-error);
+    background: #fef2f2;
+}
+
+.toast-warning {
+    border-left-color: var(--color-warning);
+    background: #fffbeb;
+}
+
+.toast-info {
+    border-left-color: #3b82f6;
+    background: #eff6ff;
 }
 
 @keyframes slideIn {
@@ -798,6 +850,13 @@ body {
 
 .toast-icon {
     font-size: var(--font-size-xl);
+    flex-shrink: 0;
+}
+
+.toast-message {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.5;
 }
 
 /* Footer */
@@ -900,6 +959,11 @@ body {
     text-align: center;
     color: var(--color-error);
     padding: var(--spacing-md);
+    background: #fef2f2;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
 }
 
 .recognized-actions {

@@ -95,6 +95,9 @@ class ImageProcessor:
             if filename is None:
                 filename = file.name
 
+            # Prevent path traversal: strip any directory components
+            filename = os.path.basename(filename)
+
             filepath = os.path.join(Config.TEMP_FOLDER, filename)
 
             with open(filepath, "wb") as f:

@@ -12,7 +12,7 @@ class FridgeRecipeBackend {
         // 개발/로컬 테스트용 - 로컬에서는 직접 API 호출 가능
         this.apiKey = this.getApiKey();
         this.baseUrl = 'https://openrouter.ai/api/v1';
-        this.model = 'google/gemini-3-flash-preview';
+        this.model = 'google/gemini-2.0-flash-exp';
     }
 
     /**
@@ -184,7 +184,12 @@ ${ingredients ? `추가 재료/요청사항: ${ingredients}` : ''}
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
+                let errorData = {};
+                try {
+                    errorData = await response.json();
+                } catch (_) {
+                    errorData = { error: response.statusText };
+                }
                 console.error('서버 API 오류:', errorData);
 
                 // Rate limit 에러 처리
@@ -327,15 +332,28 @@ ${ingredients ? `추가 재료/요청사항: ${ingredients}` : ''}
                 // 여러 방식으로 파싱 시도
                 let ingredientsList = [];
 
+                /**
+                 * 재료 항목으로 유효한지 검사
+                 * - 30자 초과 + 동사/조사가 포함된 문장은 재료가 아닌 설명으로 간주
+                 * - 빈 줄, 헤더 키워드 포함 줄 제외
+                 */
+                const isValidIngredient = (item) => {
+                    const text = item.trim();
+                    if (!text || text.length < 1) return false;
+                    if (text.length > 30 && /하세요|입니다|합니다|을\s|를\s|이\s|가\s|은\s|는\s/.test(text)) return false;
+                    if (/^(예시|응답|규칙|식재료|보이는|다음|형식|중요|규칙|참고|주의|결과|:：！)/.test(text)) return false;
+                    return true;
+                };
+
                 // 방법 1: 쉼표로 구분된 형식
                 if (content.includes(',')) {
                     ingredientsList = content
                         .split(',')
                         .map(item => item.trim())
-                        .map(item => item.replace(/^[-•*]\s*/, '')) // 앞의 기호 제거
-                        .map(item => item.replace(/\d+\.\s*/, '')) // 숫자. 제거
-                        .filter(item => item.length > 0 && item.length < 50)
-                        .filter(item => !item.match(/^(예시|응답|규칙|식재료|보이는|다음|형식)/));
+                        .map(item => item.replace(/^[-•*]\s*/, ''))
+                        .map(item => item.replace(/\d+\.\s*/, ''))
+                        .filter(item => item.length > 0 && item.length < 30)
+                        .filter(isValidIngredient);
                 }
 
                 // 방법 2: - 로 시작하는 목록 형식
@@ -344,7 +362,8 @@ ${ingredients ? `추가 재료/요청사항: ${ingredients}` : ''}
                         .split('\n')
                         .filter(line => line.trim().startsWith('-'))
                         .map(line => line.trim().substring(1).trim())
-                        .filter(ing => ing.length > 0 && ing.length < 50);
+                        .filter(ing => ing.length > 0 && ing.length < 30)
+                        .filter(isValidIngredient);
                 }
 
                 // 방법 3: 숫자. 로 시작하는 목록 형식
@@ -353,7 +372,8 @@ ${ingredients ? `추가 재료/요청사항: ${ingredients}` : ''}
                         .split('\n')
                         .filter(line => /^\d+\./.test(line.trim()))
                         .map(line => line.replace(/^\d+\.\s*/, '').trim())
-                        .filter(ing => ing.length > 0 && ing.length < 50);
+                        .filter(ing => ing.length > 0 && ing.length < 30)
+                        .filter(isValidIngredient);
                 }
 
                 // 방법 4: 줄바꿈으로만 구분된 경우 (아무 형식 없이)
@@ -361,8 +381,8 @@ ${ingredients ? `추가 재료/요청사항: ${ingredients}` : ''}
                     ingredientsList = content
                         .split('\n')
                         .map(item => item.trim())
-                        .filter(item => item.length > 2 && item.length < 50)
-                        .filter(item => !item.match(/^(예시|응답|규칙|식재료|보이는|다음|형식|:|！)/));
+                        .filter(item => item.length > 1 && item.length < 30)
+                        .filter(isValidIngredient);
                 }
 
                 // 중복 제거

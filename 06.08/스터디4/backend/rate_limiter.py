@@ -3,7 +3,7 @@ Advanced rate limiting and request throttling module
 """
 import time
 import threading
-from collections import defaultdict, deque
+from collections import defaultdict, deque, OrderedDict
 from typing import Dict, Optional, Tuple
 import hashlib
 import logging
@@ -175,7 +175,11 @@ class AdaptiveRateLimiter:
 
     def is_allowed(self) -> Tuple[bool, float]:
         """Check if request is allowed"""
-        return self.limiter.is_allowed()
+        # Grab a reference to the current limiter under the lock to avoid a
+        # race with _adjust_rate, which may replace self.limiter concurrently.
+        with self._lock:
+            limiter = self.limiter
+        return limiter.is_allowed()
 
     def record_response(self, response_time: float, success: bool = True):
         """Record response metrics for adaptation"""
@@ -196,6 +200,10 @@ class AdaptiveRateLimiter:
 class MultiTierRateLimiter:
     """Multi-tier rate limiter with different limits per user/API key"""
 
+    # Maximum number of distinct users to keep limiter state for. Beyond this
+    # the least-recently-used entries are evicted to bound memory usage.
+    MAX_USER_LIMITERS = 1000
+
     def __init__(self):
         """Initialize multi-tier rate limiter"""
         self.tiers = {
@@ -205,8 +213,8 @@ class MultiTierRateLimiter:
             'unlimited': {'requests_per_minute': float('inf'), 'requests_per_hour': float('inf')}
         }
 
-        # Per-user limiters
-        self.user_limiters = defaultdict(dict)
+        # Per-user limiters, bounded with LRU eviction to prevent unbounded growth
+        self.user_limiters = OrderedDict()
         self._lock = threading.Lock()
 
     def get_user_tier(self, user_id: str) -> str:
@@ -242,6 +250,13 @@ class MultiTierRateLimiter:
                     'minute': SlidingWindowRateLimiter(limits['requests_per_minute'], 60),
                     'hour': SlidingWindowRateLimiter(limits['requests_per_hour'], 3600)
                 }
+            else:
+                # Mark as most recently used
+                self.user_limiters.move_to_end(user_id)
+
+            # Evict least-recently-used entries to bound memory usage
+            while len(self.user_limiters) > self.MAX_USER_LIMITERS:
+                self.user_limiters.popitem(last=False)
 
             limiters = self.user_limiters[user_id]
 
@@ -253,6 +268,12 @@ class MultiTierRateLimiter:
             # Check hour limit
             hour_allowed, hour_wait = limiters['hour'].is_allowed()
             if not hour_allowed:
+                # The minute limiter already recorded this request above; roll it
+                # back so a rejected request does not consume the minute quota.
+                minute_limiter = limiters['minute']
+                with minute_limiter._lock:
+                    if minute_limiter.requests:
+                        minute_limiter.requests.pop()
                 return False, f"Hourly limit reached. Wait {int(hour_wait)} seconds"
 
             return True, "Request allowed"
@@ -286,6 +307,9 @@ class MultiTierRateLimiter:
 class APIEndpointRateLimiter:
     """Rate limiter for specific API endpoints"""
 
+    # Maximum number of distinct IP limiters to retain (LRU eviction beyond this)
+    MAX_IP_LIMITERS = 1000
+
     def __init__(self):
         """Initialize endpoint rate limiter"""
         self.endpoint_limits = {
@@ -295,10 +319,24 @@ class APIEndpointRateLimiter:
             '/api/upload': TokenBucketRateLimiter(capacity=5, refill_rate=0.2),
         }
 
-        # IP-based limiting
-        self.ip_limiters = defaultdict(lambda: SlidingWindowRateLimiter(100, 60))
+        # IP-based limiting, bounded with LRU eviction to prevent unbounded growth
+        self.ip_limiters = OrderedDict()
 
         self._lock = threading.Lock()
+
+    def _get_ip_limiter(self, ip_address: str) -> SlidingWindowRateLimiter:
+        """Get or create an IP limiter with LRU eviction (thread-safe)."""
+        with self._lock:
+            if ip_address in self.ip_limiters:
+                self.ip_limiters.move_to_end(ip_address)
+            else:
+                self.ip_limiters[ip_address] = SlidingWindowRateLimiter(100, 60)
+
+            # Evict least-recently-used entries to bound memory usage
+            while len(self.ip_limiters) > self.MAX_IP_LIMITERS:
+                self.ip_limiters.popitem(last=False)
+
+            return self.ip_limiters[ip_address]
 
     def is_allowed(self, endpoint: str, ip_address: str) -> Tuple[bool, str]:
         """
@@ -312,7 +350,7 @@ class APIEndpointRateLimiter:
             Tuple of (allowed, message)
         """
         # Check IP limit first
-        ip_allowed, ip_wait = self.ip_limiters[ip_address].is_allowed()
+        ip_allowed, ip_wait = self._get_ip_limiter(ip_address).is_allowed()
         if not ip_allowed:
             return False, f"IP rate limit exceeded. Wait {int(ip_wait)} seconds"
 

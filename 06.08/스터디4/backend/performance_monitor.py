@@ -94,6 +94,10 @@ class PerformanceMonitor:
 
     def collect_system_metrics(self) -> Dict:
         """Collect current system metrics"""
+        # Use a platform-appropriate path for disk usage
+        disk_path = 'C:\\' if os.name == 'nt' else '/'
+        disk_usage = psutil.disk_usage(disk_path)
+
         metrics = {
             'timestamp': datetime.now().isoformat(),
             'cpu_percent': psutil.cpu_percent(interval=1),
@@ -104,9 +108,9 @@ class PerformanceMonitor:
                 'used': psutil.virtual_memory().used
             },
             'disk': {
-                'total': psutil.disk_usage('/').total,
-                'used': psutil.disk_usage('/').used,
-                'percent': psutil.disk_usage('/').percent
+                'total': disk_usage.total,
+                'used': disk_usage.used,
+                'percent': disk_usage.percent
             },
             'process': {
                 'cpu_percent': self.process.cpu_percent(),

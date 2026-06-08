@@ -7,6 +7,7 @@ class FridgeRecipeApp {
         this.currentImage = null;
         this.currentRecipe = null;
         this.recognizedIngredients = [];
+        this._toastTimer = null; // Toast 타이머 ID 추적 (누적 방지)
         this.init();
     }
 
@@ -121,19 +122,21 @@ class FridgeRecipeApp {
             }
         });
 
-        // 드래그 앤 드롭
+        // 드래그 앤 드롭 - CSS 클래스로 시각적 피드백 관리
         uploadArea?.addEventListener('dragover', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#ff6b35';
+            uploadArea.classList.add('drag-over');
         });
 
-        uploadArea?.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = '#ddd';
+        uploadArea?.addEventListener('dragleave', (e) => {
+            // 자식 요소로 이동할 때 dragleave가 발생하는 경우 무시
+            if (uploadArea.contains(e.relatedTarget)) return;
+            uploadArea.classList.remove('drag-over');
         });
 
         uploadArea?.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#ddd';
+            uploadArea.classList.remove('drag-over');
             const file = e.dataTransfer.files[0];
             if (file && file.type.startsWith('image/')) {
                 this.handleImageFile(file);
@@ -196,39 +199,50 @@ class FridgeRecipeApp {
     }
 
     /**
+     * 이미지 로드 후 공통 UI 업데이트 처리
+     * loadSampleImage / handleImageFile 양쪽에서 공유
+     */
+    async _applyLoadedImage(base64DataUrl) {
+        const optimizedImage = await this.optimizeImage(base64DataUrl);
+        this.currentImage = optimizedImage;
+        this.recognizedIngredients = [];
+
+        const previewImage = document.getElementById('previewImage');
+        if (previewImage) previewImage.src = this.currentImage;
+
+        document.querySelector('.upload-placeholder')?.classList.add('hidden');
+        document.getElementById('imagePreview')?.classList.remove('hidden');
+
+        const ingredientsText = document.getElementById('ingredientsText');
+        if (ingredientsText) ingredientsText.value = '';
+
+        document.getElementById('recognizedIngredientsSection')?.classList.remove('hidden');
+
+        const recognizedContent = document.getElementById('recognizedIngredientsContent');
+        if (recognizedContent) {
+            recognizedContent.innerHTML = '<p class="recognized-hint">📸 "재료 분석하기" 버튼을 눌러 이미지 속 재료를 인식하세요.</p>';
+        }
+
+        this.updateGenerateButton();
+    }
+
+    /**
      * 샘플 이미지 로드
      */
     async loadSampleImage(sampleName) {
         try {
             const response = await fetch(`samples/${sampleName}`);
+            if (!response.ok) throw new Error(`샘플 이미지를 불러올 수 없습니다: ${response.status}`);
             const blob = await response.blob();
 
-            // Blob을 base64로 변환
             const reader = new FileReader();
             reader.onload = async (e) => {
-                // 이미지 최적화
-                const optimizedImage = await this.optimizeImage(e.target.result);
-                this.currentImage = optimizedImage;
-                this.recognizedIngredients = [];
-
-                const previewImage = document.getElementById('previewImage');
-                previewImage.src = this.currentImage;
-                document.querySelector('.upload-placeholder')?.classList.add('hidden');
-                document.getElementById('imagePreview')?.classList.remove('hidden');
-
-                // 새 이미지 업로드 시 재료 입력창 초기화
-                const ingredientsText = document.getElementById('ingredientsText');
-                ingredientsText.value = '';
-
-                // 재료 인식 섹션 표시
-                const recognizedSection = document.getElementById('recognizedIngredientsSection');
-                recognizedSection?.classList.remove('hidden');
-
-                // 재료 인식 안내 표시
-                const recognizedContent = document.getElementById('recognizedIngredientsContent');
-                recognizedContent.innerHTML = '<p class="recognized-hint">📸 "재료 분석하기" 버튼을 눌러 이미지 속 재료를 인식하세요.</p>';
-
-                this.updateGenerateButton();
+                try {
+                    await this._applyLoadedImage(e.target.result);
+                } catch (err) {
+                    console.error('이미지 처리 실패:', err);
+                    this.showToast('이미지를 처리할 수 없습니다.', 'error');
+                }
             };
             reader.readAsDataURL(blob);
         } catch (error) {
@@ -243,29 +257,12 @@ class FridgeRecipeApp {
     handleImageFile(file) {
         const reader = new FileReader();
         reader.onload = async (e) => {
-            // 이미지 최적화
-            const optimizedImage = await this.optimizeImage(e.target.result);
-            this.currentImage = optimizedImage;
-            this.recognizedIngredients = [];
-
-            const previewImage = document.getElementById('previewImage');
-            previewImage.src = this.currentImage;
-            document.querySelector('.upload-placeholder')?.classList.add('hidden');
-            document.getElementById('imagePreview')?.classList.remove('hidden');
-
-            // 새 이미지 업로드 시 재료 입력창 초기화
-            const ingredientsText = document.getElementById('ingredientsText');
-            ingredientsText.value = '';
-
-            // 재료 인식 섹션 표시
-            const recognizedSection = document.getElementById('recognizedIngredientsSection');
-            recognizedSection?.classList.remove('hidden');
-
-            // 재료 인식 안내 표시
-            const recognizedContent = document.getElementById('recognizedIngredientsContent');
-            recognizedContent.innerHTML = '<p class="recognized-hint">📸 "재료 분석하기" 버튼을 눌러 이미지 속 재료를 인식하세요.</p>';
-
-            this.updateGenerateButton();
+            try {
+                await this._applyLoadedImage(e.target.result);
+            } catch (err) {
+                console.error('이미지 처리 실패:', err);
+                this.showToast('이미지를 처리할 수 없습니다.', 'error');
+            }
         };
         reader.readAsDataURL(file);
     }
@@ -281,7 +278,9 @@ class FridgeRecipeApp {
         const hasText = ingredientsText?.value.trim().length > 0;
         const hasRecognized = this.recognizedIngredients.length > 0;
 
-        generateRecipeBtn.disabled = !(hasImage || hasText || hasRecognized);
+        if (generateRecipeBtn) {
+            generateRecipeBtn.disabled = !(hasImage || hasText || hasRecognized);
+        }
     }
 
     /**
@@ -323,7 +322,7 @@ class FridgeRecipeApp {
                         ${ingredients.map((ing, index) => `
                             <div class="recognized-item">
                                 <span class="recognized-number">${index + 1}</span>
-                                <span class="recognized-name">${ing}</span>
+                                <span class="recognized-name">${this.escapeHtml(ing)}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -414,8 +413,8 @@ class FridgeRecipeApp {
         } catch (error) {
             console.error('레시피 생성 오류:', error);
 
-            // API 키 오류인 경우
-            if (error.message.includes('API 키')) {
+            // API 키 오류인 경우 (서버 영어 메시지도 포함)
+            if (error.message.includes('API 키') || error.message.includes('API key')) {
                 this.showToast('⚠️ API 키를 설정해주세요. 설정 버튼을 클릭하세요.', 'warning');
                 // 대체 레시피 표시
                 const fallbackRecipe = window.fridgeRecipeBackend.getFallbackRecipe(ingredients || '냉장고 재료');
@@ -440,6 +439,11 @@ class FridgeRecipeApp {
         const recipeContent = document.getElementById('recipeContent');
         const recipeResult = document.getElementById('recipeResult');
 
+        if (!recipeContent) {
+            console.error('recipeContent 요소를 찾을 수 없습니다.');
+            return;
+        }
+
         // ingredients와 steps를 배열로 변환
         const ingredients = Array.isArray(recipe.ingredients)
             ? recipe.ingredients
@@ -451,10 +455,10 @@ class FridgeRecipeApp {
 
         const html = `
             <div class="recipe-header">
-                <h3 class="recipe-dish-name">${recipe.dishName}</h3>
+                <h3 class="recipe-dish-name">${this.escapeHtml(recipe.dishName)}</h3>
                 <div class="recipe-meta">
-                    <span class="recipe-badge">⏱️ ${recipe.cookingTime}</span>
-                    <span class="recipe-badge">📊 ${recipe.difficulty}</span>
+                    <span class="recipe-badge">⏱️ ${this.escapeHtml(recipe.cookingTime)}</span>
+                    <span class="recipe-badge">📊 ${this.escapeHtml(recipe.difficulty)}</span>
                 </div>
             </div>
 
@@ -463,7 +467,7 @@ class FridgeRecipeApp {
                     <span>🥬</span> 재료
                 </h4>
                 <ul class="recipe-ingredients-list">
-                    ${ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                    ${ingredients.map(ing => `<li>${this.escapeHtml(ing)}</li>`).join('')}
                 </ul>
             </div>
 
@@ -472,12 +476,12 @@ class FridgeRecipeApp {
                     <span>👨‍🍳</span> 조리법
                 </h4>
                 <ol class="recipe-steps-list">
-                    ${steps.map(step => `<li>${step}</li>`).join('')}
+                    ${steps.map(step => `<li>${this.escapeHtml(step)}</li>`).join('')}
                 </ol>
             </div>
 
             <div class="recipe-tip">
-                <strong>💡 Tip:</strong> ${recipe.tip}
+                <strong>💡 Tip:</strong> ${this.escapeHtml(recipe.tip)}
             </div>
         `;
 
@@ -514,20 +518,43 @@ class FridgeRecipeApp {
     }
 
     /**
+     * HTML 이스케이프 (XSS 방지)
+     */
+    escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = String(str ?? '');
+        return div.innerHTML;
+    }
+
+    /**
      * 토스트 메시지 표시
+     * - 연속 호출 시 이전 타이머를 clearTimeout으로 취소하여 누적 방지
+     * - type에 따라 아이콘과 색상 클래스 분기
      */
     showToast(message, type = 'success') {
         const toast = document.getElementById('successToast');
-        const toastMessage = toast?.querySelector('.toast-message');
+        if (!toast) return;
 
-        if (toastMessage) {
-            toastMessage.textContent = message;
-        }
+        const toastMessage = toast.querySelector('.toast-message');
+        const toastIcon = toast.querySelector('.toast-icon');
 
-        toast?.classList.remove('hidden');
+        if (toastMessage) toastMessage.textContent = message;
 
-        setTimeout(() => {
-            toast?.classList.add('hidden');
+        // 타입별 아이콘 매핑
+        const iconMap = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+        if (toastIcon) toastIcon.textContent = iconMap[type] ?? '✅';
+
+        // 타입별 CSS 클래스 교체
+        toast.classList.remove('toast-success', 'toast-error', 'toast-warning', 'toast-info');
+        toast.classList.add(`toast-${type}`);
+
+        // 이전 타이머 취소 후 재등록 (누적 방지)
+        if (this._toastTimer) clearTimeout(this._toastTimer);
+        toast.classList.remove('hidden');
+
+        this._toastTimer = setTimeout(() => {
+            toast.classList.add('hidden');
+            this._toastTimer = null;
         }, 3000);
     }
 }

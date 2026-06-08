@@ -24,12 +24,16 @@ class ConnectionPool:
         self._lock = threading.Lock()
         self._created_connections = 0
 
-        # Pre-create minimum connections
+        # Pre-create minimum connections and place them in the pool
         for _ in range(min(3, max_connections)):
-            self._create_connection()
+            conn = self._create_connection_counted()
+            self._pool.put(conn)
 
     def _create_connection(self) -> sqlite3.Connection:
-        """Create a new database connection with optimizations"""
+        """Create a new database connection with optimizations.
+
+        Note: callers are responsible for accounting (_created_connections).
+        """
         conn = sqlite3.connect(self.db_path, check_same_thread=False)
 
         # Enable WAL mode for better concurrency
@@ -44,24 +48,51 @@ class ConnectionPool:
         # Enable foreign keys
         conn.execute("PRAGMA foreign_keys=ON")
 
-        self._created_connections += 1
         return conn
+
+    def _create_connection_counted(self) -> sqlite3.Connection:
+        """Create a connection and increment the counter under the lock."""
+        with self._lock:
+            self._created_connections += 1
+        try:
+            return self._create_connection()
+        except Exception:
+            # Roll back the count if creation failed
+            with self._lock:
+                self._created_connections -= 1
+            raise
 
     @contextmanager
     def get_connection(self, timeout: float = 5.0):
         """Get a connection from the pool"""
         connection = None
         try:
-            # Try to get existing connection
-            if not self._pool.empty():
-                connection = self._pool.get(timeout=timeout)
-            else:
-                # Create new connection if under limit
+            # 1. Prefer reusing an idle connection already in the pool.
+            try:
+                connection = self._pool.get_nowait()
+            except Exception:
+                connection = None
+
+            if connection is None:
+                # 2. Otherwise create a new one if under the limit. The decision
+                #    and counter bump happen under the lock; the blocking get()
+                #    fallback runs OUTSIDE the lock to avoid deadlock.
+                create_new = False
                 with self._lock:
                     if self._created_connections < self.max_connections:
+                        create_new = True
+                        self._created_connections += 1
+
+                if create_new:
+                    try:
                         connection = self._create_connection()
-                    else:
-                        connection = self._pool.get(timeout=timeout)
+                    except Exception:
+                        with self._lock:
+                            self._created_connections -= 1
+                        raise
+                else:
+                    # 3. At capacity: block (outside the lock) until one is freed.
+                    connection = self._pool.get(timeout=timeout)
 
             yield connection
 
@@ -73,7 +104,7 @@ class ConnectionPool:
                     connection.execute("SELECT 1")
                     self._pool.put(connection)
                 except:
-                    # Connection is broken, create new one
+                    # Connection is broken, discard it and decrement the count
                     try:
                         connection.close()
                     except:
@@ -83,21 +114,20 @@ class ConnectionPool:
 
     def close_all(self):
         """Close all connections in the pool"""
-        while not self._pool.empty():
-            try:
-                conn = self._pool.get_nowait()
-                conn.close()
-            except:
-                pass
-        self._created_connections = 0
+        with self._lock:
+            while not self._pool.empty():
+                try:
+                    conn = self._pool.get_nowait()
+                    conn.close()
+                    self._created_connections -= 1
+                except:
+                    pass
 
 
 class OptimizedRecipeDatabase:
     """Optimized SQLite database manager with connection pooling and caching"""
 
     # Cache configuration
-    _cache = {}
-    _cache_timestamps = {}
     _cache_ttl = 300  # 5 minutes
 
     def __init__(self, db_path: str = "recipes.db", pool_size: int = 10):
@@ -105,6 +135,12 @@ class OptimizedRecipeDatabase:
         self.pool = ConnectionPool(db_path, pool_size)
         self._init_lock = threading.Lock()
         self._write_lock = threading.Lock()
+
+        # Per-instance cache (not shared across instances)
+        self._cache = {}
+        self._cache_timestamps = {}
+        self._cache_lock = threading.Lock()
+
         self.init_database()
 
     def init_database(self):
@@ -240,29 +276,32 @@ class OptimizedRecipeDatabase:
 
     def _invalidate_cache(self, cache_key: Optional[str] = None):
         """Invalidate cache entries"""
-        if cache_key:
-            self._cache.pop(cache_key, None)
-            self._cache_timestamps.pop(cache_key, None)
-        else:
-            self._cache.clear()
-            self._cache_timestamps.clear()
+        with self._cache_lock:
+            if cache_key:
+                self._cache.pop(cache_key, None)
+                self._cache_timestamps.pop(cache_key, None)
+            else:
+                self._cache.clear()
+                self._cache_timestamps.clear()
 
     def _get_from_cache(self, cache_key: str) -> Optional[Any]:
         """Get value from cache if valid"""
-        if cache_key in self._cache:
-            timestamp = self._cache_timestamps.get(cache_key, 0)
-            if time.time() - timestamp < self._cache_ttl:
-                return self._cache[cache_key]
-            else:
-                # Expired, remove from cache
-                self._cache.pop(cache_key, None)
-                self._cache_timestamps.pop(cache_key, None)
+        with self._cache_lock:
+            if cache_key in self._cache:
+                timestamp = self._cache_timestamps.get(cache_key, 0)
+                if time.time() - timestamp < self._cache_ttl:
+                    return self._cache[cache_key]
+                else:
+                    # Expired, remove from cache
+                    self._cache.pop(cache_key, None)
+                    self._cache_timestamps.pop(cache_key, None)
         return None
 
     def _set_cache(self, cache_key: str, value: Any):
         """Set cache value"""
-        self._cache[cache_key] = value
-        self._cache_timestamps[cache_key] = time.time()
+        with self._cache_lock:
+            self._cache[cache_key] = value
+            self._cache_timestamps[cache_key] = time.time()
 
     def save_recipe_batch(self, recipes: List[Dict]) -> List[int]:
         """Save multiple recipes in a single transaction"""
